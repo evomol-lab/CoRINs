@@ -1,0 +1,48 @@
+{
+  "name": "dm-file-uploader",
+  "description": "A very lightweight and configurable jQuery Plugin for file uploading using ajax(async); includes support for queues, progress tracking and drag and drop.",
+  "main": "src/jquery.dmuploader.js",
+  "authors": [
+    {
+      "name": "Daniel Morales",
+      "email": "daniel85mg@gmail.com",
+      "homepage": "https://danielmg.org"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danielm/uploader.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "javascript",
+    "jquery",
+    "lightweight",
+    "upload",
+    "ajax",
+    "forms",
+    "file",
+    "widget",
+    "multiple",
+    "dnd",
+    "drag",
+    "drop",
+    "progress",
+    "form",
+    "queue",
+    "lightweight"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.0"
+  },
+  "homepage": "https://github.com/danielm/uploader",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

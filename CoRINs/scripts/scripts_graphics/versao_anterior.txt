@@ -1,0 +1,126 @@
+from math import sqrt
+
+file_arq1 = open('nodes/1b55_nodes.txt', 'r') #entrada de dados
+file_arq2 = open('nodes/2z0p_nodes.txt', 'r') #entrada de dados
+
+
+## node
+
+x = file_arq1.readline()
+t = file_arq1.readlines()
+
+dict_arq1 = {}
+chaves_arq1 = []
+
+
+#
+for linha in t:
+    linha = linha.split()
+
+    if (linha[1] not in dict_arq1):
+        dict_arq1[linha[1]] = [[int(linha[2]), linha[0]]]
+        chaves_arq1.append(linha[1])
+    else:
+        dict_arq1[linha[1]].append([int(linha[2]), linha[0]])
+
+
+## escrevendo os arquivos de saida
+
+for i in dict_arq1:
+    dict_arq1[i].sort()
+
+#for i in range(0, len(chaves_arq1)):
+#    nomeArquivo = "saida" + str(chaves_arq1[i]) + ".svg"
+#    file2 = open(nomeArquivo, "w")    
+#
+#    for j in dict_arq1[chaves_arq1[i]]:
+#        file2.write(j[1]+ "\n")
+
+
+
+
+
+
+
+##------------------------------- 2z0p---------------------
+x = file_arq2.readline()
+t = file_arq2.readlines()
+
+dict_arq2 = {}
+chaves_arq2 = []
+
+
+#
+for linha in t:
+    linha = linha.split()
+
+    if (linha[1] not in dict_arq2):
+        dict_arq2[linha[1]] = [[int(linha[2]), linha[0]]]
+        chaves_arq2.append(linha[1])
+    else:
+        dict_arq2[linha[1]].append([int(linha[2]), linha[0]])
+
+
+## escrevendo os arquivos de saida
+
+
+for i in dict_arq2:
+    dict_arq2[i].sort()
+    
+
+# os maiores das cadeias
+
+cadeia = []
+
+for i in dict_arq1:
+    for j in dict_arq2:
+        x = dict_arq1[i][-1][0]
+        y = dict_arq2[j][-1][0]
+        cadeia.append(max(x, y))
+
+
+
+dict_node_diff = {}
+for i in chaves_arq2:
+    for j in chaves_arq1:
+        nomeArquivo = "result/dif_nodes_2z0p_1b55.txt-"+ i +"x" + j +".txt"
+        file_arq3 = open(nomeArquivo,"r")
+        dict_node_diff[i+j] = []
+       
+        for x in file_arq3.readlines():
+            x = int(x.split(":")[0])
+            dict_node_diff[i+j].append(x)
+
+
+teste = open("saidateste.svg", "w")
+teste.write("group,variable,value,idnode\n")
+
+i = cadeia[0]
+coluna = 0    
+linha = 0
+
+for x in range(1, i+1):
+    nome = "-"
+    for l in dict_arq1["A"]:
+        if x == l[0]:
+            nome = l[1]
+
+    if nome == "-":
+        for l in dict_arq2["A"]:
+            if x == l[0]:
+                nome = l[1]
+
+    
+    if x in dict_node_diff["AA"]:
+        teste.write(str(coluna) + "," + str(linha) + "," + str(500) +",\"" + nome +"\"\n")
+    elif nome == "-":
+        teste.write(str(coluna) + "," + str(linha) + "," + str(1) +",\"" + nome +"\"\n")
+    else:
+        teste.write(str(coluna) + "," + str(linha) + "," + str(20) +"," + nome +"\n")
+    #print(str(linha) + "," + str(coluna) + ",1")
+    
+    
+    coluna += 1
+    if coluna == int(sqrt(i)):
+        linha += 1
+        coluna = 0
