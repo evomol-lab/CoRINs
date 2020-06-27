@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SB Admin 2 - Dashboard</title>
+  <style>
+
+    body {
+      font: 10px sans-serif;
+    }
+
+    
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+    
+    .bar {
+      fill: #007bff;
+    }
+    
+    .bar:hover {
+      fill: orangered ;
+    }
+    
+    .x.axis path {
+      display: none;
+    }
+    
+    .d3-tip {
+      line-height: 1;
+      font-weight: bold;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 2px;
+    }
+    
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+    
+    .d3-tip2 {
+      line-height: 1;
+      font-weight: bold;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 2px;
+    }
+    
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip2:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+    /* Style northward tooltips differently */
+    .d3-tip2.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+    .d3-tip.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+
+    .img-wrapper {
+    overflow: auto;
+    
+
+    position: relative;
+}
+
+.img-wrapper > img {
+    height: 600%;
+    width: 600%;
+    vertical-align: bottom;
+  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+.img-wrapper > img:hover {
+    
+  transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+    </style>
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.css" rel="stylesheet">
+  
+  <!-- Custom styles for this page -->
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+
+
+
+  <!-- LInks do UPLOAD MASTER-->
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+    integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+  <!-- Custom styles -->
+  
+  <link href="uploader_master/dist/css/jquery.dm-uploader.min.css" rel="stylesheet">
+  <!--<link href="uploader_master/demo/styles.css" rel="stylesheet">-->
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <img src="img/logo.png"  class="img-fluid" alt="Responsive image">
+        <div class="sidebar-brand-text mx-3">CORINS</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Home -->
+      <li class="nav-item active">
+          <a class="nav-link" href="index.html">
+            <i class="fas fa-home"></i>
+            <span>Home</span></a>
+        </li>
+  
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+          <a class="nav-link" href="resultado01.html">
+            <i class="fas fa-cogs"></i>
+            <span>Dashboard</span></a>
+        </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+
+
+
+
+
+
+
+    
+    <!-- Content Wrapper -->
+
+    <div id="content-wrapper" class="d-flex flex-column">
+      <!-- begin of Main Content -->
+      <div class="container-fluid">
+        <div class="row">
+          <br>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+
+
+
+
+            <!-- CARD DE PROTEINA 1 -->
+            <div class="col-xl-12 col-md-6 mb-4">
+              <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1"> Choose Protein 1</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+
+                            <div class="dropdown mb-4">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Comparation Name
+                              </button>
+                              <div class="dropdown-menu animated--fade-in" id="protein1" style="max-height: 500px; overflow-y: auto;" aria-labelledby="dropdownMenuButton">
+                                <!--a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a-->
+                              </div>
+                              <small id="protein_1_small"></small>
+                              <form action="">
+                                <input type="hidden" id="proteina_select_1">
+                              </form>
+                            </div>
+
+
+
+                          </div>
+                        </div>
+                        <!-- <div class="col">
+                            <div class="dropdown mb-4">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Chain
+                                </button>
+                                <div class="dropdown-menu animated--fade-in" id="chain1" aria-labelledby="dropdownMenuButton"> -->
+                                  <!--a class="dropdown-item" href="#">Action</a>
+                                  <a class="dropdown-item" href="#">Another action</a>
+                                  <a class="dropdown-item" href="#">Something else here</a-->
+                                <!-- </div>
+                                <small id="chain_1_small"></small>
+                                <form action="">
+                                    <input type="hidden" id="chain_select_1">
+                                  </form>
+                              </div>
+                        </div> -->
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <!-- <i class="fas fa-atom fa-2x text-gray-300"></i> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- CARD DE PROTEINA 2 -->
+            <!-- <div class="col-xl-12 col-md-6 mb-4">
+              <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1"> Choose Protein 2</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+
+                            <div class="dropdown mb-4">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Protein Name
+                              </button>
+                              <div class="dropdown-menu animated--fade-in" id="protein2" aria-labelledby="dropdownMenuButton"> -->
+                                <!--a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a-->
+                              <!-- </div>
+                              <small id="protein_2_small"></small>
+                              <form action="">
+                                <input type="hidden" id="proteina_select_2">
+                              </form>
+                            </div>
+
+
+
+                          </div>
+                        </div>
+                        <div class="col">
+                            <div class="dropdown mb-4">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Chain
+                                </button>
+                                <div class="dropdown-menu animated--fade-in" id="chain2" aria-labelledby="dropdownMenuButton"> -->
+                                  <!--a class="dropdown-item" href="#">Action</a>
+                                  <a class="dropdown-item" href="#">Another action</a>
+                                  <a class="dropdown-item" href="#">Something else here</a-->
+                                <!-- </div>
+                                <small id="chain_2_small"></small>
+                                <form action="">
+                                  <input type="hidden" id="chain_select_2">
+                                </form>
+                              </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-atom fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+            <!-- CARD DE DOWNLOAD -->
+            <div class="col-xl-12 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1"> Download Results</div>
+                        <div class="row no-gutters align-items-center">
+                          <div class="col-auto">
+                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+  
+                              <div class="dropdown mb-4">
+                                <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Selected
+                                </button>   
+                              </div>
+  
+  
+  
+                            </div>
+                          </div>
+                          <div class="col">
+                              <div class="dropdown mb-4">
+                                  <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    All
+                                  </button>
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fa fa-file fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+          </div>
+
+
+          <div class="col-lg-8">
+
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Total differences in interactions (Result-Interaction)</h6>
+                </div>
+                <div class="card-body img-wrapper" id="plotpng">
+                  <br>
+                  <br>
+                </div>
+              </div>
+          </div>
+
+
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Total differences in interactions (Result-Interaction)</h6>
+                </div>
+                <div class="card-body" id="interaction_degree">
+                  <br>
+                  <br>
+                </div>
+              </div>
+          </div>
+        </div>
+        
+        <div class="row">
+
+      
+
+          <div class="col-lg-6">
+            <!-- 3  Card -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">High Number Degree (<strong id='degree_heat_prot1'>  </strong>):</h6>
+              </div>
+              
+              <div class="card-body" id="heat_map_degree_template">
+              <br>
+              </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+          <!-- 3  Card -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">High Number Degree (<strong id='degree_heat_prot2'>  </strong>):</h6>
+            </div>
+            
+            <div class="card-body" id="heat_map_degree_template_sec">
+            <br>
+            </div>
+          </div>
+      </div>
+
+            
+        </div>
+
+        <div class="row">
+          
+          <div class="col-lg-6">
+            <!--GRAFICO HIGH NUMBER DEGREE -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">High numbers of degree differences (Degree)</h6>
+              </div>
+              <div class="card-body" id="degree_diff" >
+                
+              </div>
+            </div>
+          </div> 
+          
+          
+          <div class="col-lg-6">
+
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Differences of Degrees</h6>
+              </div>
+              <div class="card-body">
+
+                <div class="table-responsive">
+                  <table class="table table-bordered display" id="dataTable1" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>NodeID</th>
+                        <th>Degree</th>
+                        <th>pdbFileName</th>
+                      </tr>
+                    </thead>
+                   
+                    <tbody id="degree_body">
+                      
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                          <th>NodeID</th>
+                          <th>Degree</th>
+                          <th>pdbFileName</th>
+                        </tr>
+                      </tfoot>
+                  </table>
+                </div>
+
+              </div>
+            </div>   
+      </div>
+
+          
+        </div>
+
+        
+
+        <div class="row">
+
+          <div class="col-lg-6">
+            <!-- 3  Card -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Visualization of Difference RIN (Result-Heatmap)</h6>
+              </div>
+              <div class="card-body" id="heat_map_template">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+
+            <!-- DataTales Example -->
+            
+        
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Differences in Aminoacid</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered display" id="dataTableNode3" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>NodeId</th>
+                        <th>Degree</th>
+                        <th>Bfactor</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>NodeId</th>
+                        <th>Degree</th>
+                        <th>Bfactor</th>
+                      </tr>
+                    </tfoot>
+                    <tbody id='nodeTableBody3'>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          </div>          
+
+                 
+
+          
+        </div>
+        
+        <div class="row">
+
+          <div class="col-lg-6">
+
+            <!-- DataTales Example -->
+            
+        
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Differences of Nodes (<strong><span id="node1-span"></span></strong>)</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered display" id="dataTableNode1" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>NodeId</th>
+                        <th>Degree</th>
+                        <th>Bfactor</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>NodeId</th>
+                        <th>Degree</th>
+                        <th>Bfactor</th>
+                      </tr>
+                    </tfoot>
+                    <tbody id='nodeTableBody1'>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-6">
+
+            <!-- DataTales Example -->
+            
+        
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Differences of Nodes (<strong><span id="node2-span"></span></strong>)</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered display" id="dataTableNode2" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>NodeId</th>
+                        <th>Degree</th>
+                        <th>Bfactor</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>NodeId</th>
+                        <th>Degree</th>
+                        <th>Bfactor</th>
+                      </tr>
+                    </tfoot>
+                    <tbody id='nodeTableBody2'>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+         
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Differences of Edges (<strong><span id="edge1-span"></span></strong>)</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered display" id="dataTableEdge1" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>NodeId1</th>
+                        <th>Interaction</th>
+                        <th>NodeId2</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>NodeId1</th>
+                        <th>Interaction</th>
+                        <th>NodeId2</th>
+                      </tr>
+                    </tfoot>
+                    <tbody id='edgeTableBody1'>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+  
+          </div>  
+          <div class="col-lg-6">
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Differences of Edges (<strong><span id="edge2-span"></span></strong>)</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered display" id="dataTableEdge2" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>NodeId1</th>
+                        <th>Interaction</th>
+                        <th>NodeId2</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>NodeId1</th>
+                        <th>Interaction</th>
+                        <th>NodeId2</th>
+                      </tr>
+                    </tfoot>
+                    <tbody id='edgeTableBody2'>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+  
+          </div>  
+        </div>
+        <!-- End of Main Content -->
+        <div class="row">
+
+          <div class="col-lg-6">
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Rcode 1 (<strong><span id="rcode1-span"></span></strong>) </h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered display" id="dataR1" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        
+                        <th>Node</th>
+                        <th>Degree</th>
+                        <th>AminoAcid</th>
+                        <th>Triangles</th>
+                        <th>ClusteringCoef</th>
+                        <th>DetweennessWeighted</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>Node</th>
+                        <th>Degree</th>
+                        <th>AminoAcid</th>
+                        <th>Triangles</th>
+                        <th>ClusteringCoef</th>
+                        <th>BetweennessWeighted</th>
+                      </tr>
+                    </tfoot>
+                    <tbody id='rcode1'>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+
+              <!-- DataTales Example -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Rcode 2 (<strong><span id="rcode2-span"></span></strong>) </h6>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered display" id="dataR2" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                              
+                              <th>Node</th>
+                              <th>Degree</th>
+                              <th>AminoAcid</th>
+                              <th>Triangles</th>
+                              <th>ClusteringCoef</th>
+                              <th>DetweennessWeighted</th>
+                            </tr>
+                          </thead>
+                          <tfoot>
+                            <tr>
+                              <th>Node</th>
+                              <th>Degree</th>
+                              <th>AminoAcid</th>
+                              <th>Triangles</th>
+                              <th>ClusteringCoef</th>
+                              <th>BetweennessWeighted</th>
+                            </tr>
+                          </tfoot>
+                      <tbody id='rcode2'>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              </div>
+
+        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Felipe Vieira </span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+
+      </div>
+      <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    
+
+    <!--ANTIGO D3 - Versao 4--> 
+    <script src="http://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+     
+
+    <!--ANTIGO D3 - Versao 3--> 
+    <script src="js/d3.v3.js"></script>
+    <script src="js/d3.tip.js"></script>
+   
+       
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+
+   
+
+    <script src="js/heatmap.js"></script>
+    <script src="js/degree.js"></script>
+   
+    <script src="js/degree_diff.js"></script>
+    <script src="js/interaction.js"></script>
+
+    <script type="text/javascript" >
+
+window.onresize = function() // Tornando os gráficos responsivos
+        {
+          
+          if ( pathAuxHeatMap != "") // Verificando se a função heatmap já foi chamada pelo menos uma vez  
+          {
+            $("#heat_map_template").html("");
+            heatmap( pathAuxHeatMap );
+          }
+
+          if ( pathAuxDegree != "") // Verificando se a função chart_degree já foi chamada pelo menos uma vez  
+          {
+            $("#heat_map_degree_template").html("");
+            chart_degree( pathAuxDegree );
+          }
+
+          if ( pathAuxDegreeChart2 != "") // Verificando se a função chart_degree2 já foi chamada pelo menos uma vez  
+          {
+            $("#heat_map_degree_template_sec").html("");
+            chart_degree2( pathAuxDegree );
+          }
+
+          if ( pathAuxBarChartIteration != "") // Verificando se a função show_interation já foi chamada pelo menos uma vez  
+          {
+            $("#interaction_degree").html("");
+            show_interation( pathAuxBarChartIteration );
+          }
+          
+          if ( pathAuxDegreeDiff != "") // Verificando se a função show_interation já foi chamada pelo menos uma vez  
+          {
+            $("#degree_diff").html("");
+            degree_diff( pathAuxDegreeDiff );
+          }
+          
+        }
+
+        let give_event_to_protein_and_chain = true;
+        $(document).ready(function(){
+          //heatmap("../upload_ring_files/6xof0to7i8ppkloc4mf94st1bocgdgoy/heatmap-1b55x2z0p-AB.csv");
+          proteinas_arr = get_lista_proteinas();
+         
+          att_protein_1(proteinas_arr);
+          // att_protein_2(proteinas_arr);
+          //att_chains_1( pasta );
+          //att_chains_2( pasta );
+          
+        });
+        function get_edge(){
+          let url_string = window.location.href;
+          let url = new URL(url_string);
+          let pasta = url.searchParams.get('pasta');
+
+          var data = new FormData();
+          data.append('prot1',  get_input_prot_1())
+          data.append('prot2',  get_input_prot_2())
+          data.append('chain1', get_input_chain_1())
+          data.append('chain2', get_input_chain_2())
+          data.append('pasta', pasta)
+          $.ajax({
+            
+            url : 'http://127.0.0.1:8000/core/edges/', 
+            type : 'POST',
+            data:data,
+            contentType : false,
+            processData : false,
+            success: function(data){
+              $('#dataTableEdge').DataTable().destroy();
+              var node_body =$('#edgeTableBody');
+              node_body.empty();
+              let nodes = data['degree']
+              
+              for (node of nodes){
+                  
+                  col = node.split('\t');
+                  
+                  node_body.append(`<tr>
+                            <td>${col[0]}</td>
+                            <td>${col[1]}</td>
+                            <td>${col[2]}</td>
+                          </tr>`)
+              
+              }
+              $('#dataTableEdge').DataTable({
+                  "ordering": false
+              });
+              $('#dataTableEdge.display').DataTable();
+            }
+          });
+        }
+        function get_node(){
+          let url_string = window.location.href;
+          let url = new URL(url_string);
+          let pasta = url.searchParams.get('pasta');
+
+          var data = new FormData();
+          data.append('prot1',  get_input_prot_1())
+          data.append('prot2',  get_input_prot_2())
+          data.append('chain1', get_input_chain_1())
+          data.append('chain2', get_input_chain_2())
+          data.append('pasta', pasta)
+          $.ajax({
+            
+            url : 'http://127.0.0.1:8000/core/nodes/', 
+            type : 'POST',
+            data:data,
+            contentType : false,
+            processData : false,
+            success: function(data){
+              $('#dataTableNode').DataTable().destroy();
+              var node_body =$('#nodeTableBody');
+              node_body.empty();
+              let nodes = data['degree']
+              
+              for (node of nodes){
+                  
+                  col = node.split('\t');
+                  
+                  node_body.append(`<tr>
+                            <td>${col[0]}</td>
+                            <td>${col[1]}</td>
+                            <td>${col[2]}</td>
+                          </tr>`)
+              
+              }
+              $('#dataTableNode').DataTable({
+                  "ordering": false
+              });
+              $('#dataTableNode.display').DataTable();
+            }
+          });
+        }
+        function get_Rcode_Nos_1(){
+          let url_string = window.location.href;
+          let url = new URL(url_string);
+          let pasta = url.searchParams.get('pasta');
+
+          var data = new FormData();
+          data.append('prot1',  get_input_prot_1())
+          data.append('pasta', pasta)
+          $.ajax({
+            
+            url : 'http://127.0.0.1:8000/core/rcode1/', 
+            type : 'POST',
+            data:data,
+            contentType : false,
+            processData : false,
+            success: function(data){
+              $('#dataR1').DataTable().destroy();
+              var degree_body =$('#rcode1');
+              degree_body.empty();
+              let Node = data['rcode1']['node']
+              let Degree = data['rcode1']['degree']
+              let AminoAcid = data['rcode1']['aminoAcid']
+              let Triangles = data['rcode1']['triangles']
+              let ClusteringCoef = data['rcode1']['clusteringCoef']
+              let BetweennessWeighted = data['rcode1']['betweennessWeighted']
+              $('#rcode1-span').html(data['name'])
+              // console.log(NodeId[1])
+              cont = 0;
+              for (degree of Node){
+                
+                  // col = degree.split('\t');
+                  
+                  degree_body.append(`<tr>
+                            <td>${degree}</td>
+                            <td>${Degree[cont]}</td>
+                            <td>${AminoAcid[cont]}</td>
+                            <td>${Triangles[cont]}</td>
+                            <td>${ClusteringCoef[cont]}</td>
+                            <td>${BetweennessWeighted[cont]}</td>
+                          </tr>`)
+              cont++;
+              }
+              $('#dataR1').DataTable({
+                  "ordering": false
+              });
+              $('#dataR1.display').DataTable();
+            }
+          });
+        }
+        function get_Rcode_Nos_2(){
+          let url_string = window.location.href;
+          let url = new URL(url_string);
+          let pasta = url.searchParams.get('pasta');
+
+          var data = new FormData();
+          data.append('prot1',  get_input_prot_1())
+          data.append('pasta', pasta)
+          $.ajax({
+            
+            url : 'http://127.0.0.1:8000/core/rcode2/', 
+            type : 'POST',
+            data:data,
+            contentType : false,
+            processData : false,
+            success: function(data){
+              $('#dataR2').DataTable().destroy();
+              var degree_body =$('#rcode2');
+              degree_body.empty();
+              let Node = data['rcode2']['node']
+              let Degree = data['rcode2']['degree']
+              let AminoAcid = data['rcode2']['aminoAcid']
+              let Triangles = data['rcode2']['triangles']
+              let ClusteringCoef = data['rcode2']['clusteringCoef']
+              let BetweennessWeighted = data['rcode2']['betweennessWeighted']
+              $('#rcode2-span').html(data['name'])
+              // console.log(NodeId[1])
+              cont = 0;
+              for (degree of Node){
+                
+                  // col = degree.split('\t');
+                  
+                  degree_body.append(`<tr>
+                            <td>${degree}</td>
+                            <td>${Degree[cont]}</td>
+                            <td>${AminoAcid[cont]}</td>
+                            <td>${Triangles[cont]}</td>
+                            <td>${ClusteringCoef[cont]}</td>
+                            <td>${BetweennessWeighted[cont]}</td>
+                          </tr>`)
+              cont++;
+              }
+              $('#dataR2').DataTable({
+                  "ordering": false
+              });
+              $('#dataR2.display').DataTable();
+            }
+          });
+        }
+        function edgestables(){
+          let url_string = window.location.href;
+          let url = new URL(url_string);
+          let pasta = url.searchParams.get('pasta');
+
+          var data = new FormData();
+          data.append('prot1',  get_input_prot_1())
+          data.append('pasta', pasta)
+          $.ajax({
+            
+            url : 'http://127.0.0.1:8000/core/edgestables/', 
+            type : 'POST',
+            data:data,
+            contentType : false,
+            processData : false,
+            success: function(data){
+              $('#dataTableEdge1').DataTable().destroy();
+              var degree_body =$('#edgeTableBody1');
+              degree_body.empty();
+              let NodeId1 = data['edge1']['NodeId1']
+              let Interaction = data['edge1']['Interaction']
+              let NodeId2 = data['edge1']['NodeId2']
+              $('#edge1-span').html(data['name1'])
+              // console.log(NodeId[1])
+              cont = 0;
+              for (degree of NodeId1){
+                
+                  // col = degree.split('\t');
+                  
+                  degree_body.append(`<tr>
+                            <td>${degree}</td>
+                            <td>${Interaction[cont]}</td>
+                            <td>${NodeId2[cont]}</td>
+                          </tr>`)
+              cont++;
+              }
+              $('#dataTableEdge1').DataTable({
+                  "ordering": false
+              });
+              $('#dataTableEdge1.display').DataTable();
+              //table edge 2
+              $('#dataTableEdge2').DataTable().destroy();
+              var degree_body =$('#edgeTableBody2');
+              degree_body.empty();
+              NodeId1 = data['edge2']['NodeId1']
+              Interaction = data['edge2']['Interaction']
+              NodeId2 = data['edge2']['NodeId2']
+              $('#edge2-span').html(data['name2'])
+              // $('#rcode2-span').html(data['name'])
+              // console.log(NodeId[1])
+              cont = 0;
+              for (degree of NodeId1){
+                
+                  // col = degree.split('\t');
+                  
+                  degree_body.append(`<tr>
+                            <td>${degree}</td>
+                            <td>${Interaction[cont]}</td>
+                            <td>${NodeId2[cont]}</td>
+                          </tr>`)
+              cont++;
+              }
+              $('#dataTableEdge2').DataTable({
+                  "ordering": false
+              });
+              $('#dataTableEdge2.display').DataTable();
+
+            }
+          });
+        }
+        function nodestables(){
+          let url_string = window.location.href;
+          let url = new URL(url_string);
+          let pasta = url.searchParams.get('pasta');
+
+          var data = new FormData();
+          data.append('prot1',  get_input_prot_1())
+          data.append('pasta', pasta)
+          $.ajax({
+            
+            url : 'http://127.0.0.1:8000/core/nodestables/', 
+            type : 'POST',
+            data:data,
+            contentType : false,
+            processData : false,
+            success: function(data){
+              $('#dataTableNode1').DataTable().destroy();
+              var degree_body =$('#nodeTableBody1');
+              degree_body.empty();
+              let NodeId = data['node1']['NodeId']
+              let Degree = data['node1']['Degree']
+              let Bfactor_CA = data['node1']['Bfactor_CA']
+              $('#node1-span').html(data['name1'])
+              // console.log(NodeId)
+              cont = 0;
+              for (xxx of NodeId){
+                
+                  // col = degree.split('\t');
+                  
+                  degree_body.append(`<tr>
+                            <td>${xxx}</td>
+                            <td>${Degree[cont]}</td>
+                            <td>${Bfactor_CA[cont]}</td>
+                          </tr>`)
+              cont++;
+              }
+              $('#dataTableNode1').DataTable({
+                  "ordering": false
+              });
+              $('#dataTableNode1.display').DataTable();
+              //table node 2
+              $('#dataTableNode2').DataTable().destroy();
+
+              var degree_body =$('#nodeTableBody2');
+              degree_body.empty();
+               NodeId = data['node2']['NodeId']
+               Degree = data['node2']['Degree']
+               Bfactor_CA = data['node2']['Bfactor_CA']
+               $('#node2-span').html(data['name2'])
+              // console.log(NodeId[1])
+              cont = 0;
+              for (degree of NodeId){
+                
+                  // col = degree.split('\t');
+                  
+                  degree_body.append(`<tr>
+                            <td>${degree}</td>
+                            <td>${Degree[cont]}</td>
+                            <td>${Bfactor_CA[cont]}</td>
+                          </tr>`)
+              cont++;
+              }
+              $('#dataTableNode2').DataTable({
+                  "ordering": false
+              });
+              $('#dataTableNode2.display').DataTable();
+              // table node 3
+              $('#dataTableNode3').DataTable().destroy();
+
+              var degree_body =$('#nodeTableBody3');
+              degree_body.empty();
+               NodeId = data['node3']['NodeId']
+               Degree = data['node3']['Degree']
+               Bfactor_CA = data['node3']['Bfactor_CA']
+              // $('#rcode2-span').html(data['name'])
+              // console.log(NodeId[1])
+              cont = 0;
+              for (degree of NodeId){
+                
+                  // col = degree.split('\t');
+                  
+                  degree_body.append(`<tr>
+                            <td>${degree}</td>
+                            <td>${Degree[cont]}</td>
+                            <td>${Bfactor_CA[cont]}</td>
+                          </tr>`)
+              cont++;
+              }
+              $('#dataTableNode3').DataTable({
+                  "ordering": false
+              });
+              $('#dataTableNode3.display').DataTable();
+
+            }
+          });
+        }
+        function get_degree(){
+          let url_string = window.location.href;
+          let url = new URL(url_string);
+          let pasta = url.searchParams.get('pasta');
+
+          var data = new FormData();
+          data.append('prot1',  get_input_prot_1())
+          
+          // data.append('prot2',  get_input_prot_2())
+          // data.append('chain1', get_input_chain_1())
+          // data.append('chain2', get_input_chain_2())
+          data.append('pasta', pasta)
+          $.ajax({
+            
+            url : 'http://127.0.0.1:8000/core/degree/', 
+            type : 'POST',
+            data:data,
+            contentType : false,
+            processData : false,
+            success: function(data){
+              $('#dataTable1').DataTable().destroy();
+              var degree_body =$('#degree_body');
+              degree_body.empty();
+              
+              let NodeId = data['degree']['NodeId']
+              let Degree = data['degree']['Degree']
+              let pdbFileName = data['degree']['pdbFileName']
+              // console.log(NodeId[1])
+              cont = 0;
+              for (degree of NodeId){
+                
+                  // col = degree.split('\t');
+                  
+                  degree_body.append(`<tr>
+                            <td>${degree}</td>
+                            <td>${Degree[cont]}</td>
+                            <td>${pdbFileName[cont]}</td>
+                          </tr>`)
+              cont++;
+              }
+              $('#dataTable1').DataTable({
+                  "ordering": false
+              });
+              $('#dataTable1.display').DataTable();
+            }
+          });
+        }
+
+        function show_heatmap(){
+          const prot1 = get_input_prot_1();
+          // const chain1 = get_input_chain_1();
+          // const prot2 = get_input_prot_2();
+          // const chain2 = get_input_chain_2();
+          //console.log(prot1,prot2, chain1, chain2)
+          if(prot1){
+            let url_string = window.location.href;
+            let url = new URL(url_string);
+            let pasta = url.searchParams.get('pasta');
+            let div = $('#heat_map_template');
+            div.empty();
+            heatmap(`../upload_ring_files/${pasta}/${prot1}/heatmap-${prot1}.csv`);
+            //heatmap("../upload_ring_files/6xof0to7i8ppkloc4mf94st1bocgdgoy/heatmap-1b55x2z0p-AB.csv");
+            //console.log(`../upload_ring_files/${pasta}/heatmap-${prot1}x${prot2}-${chain1}${chain2}.csv`);
+              $('#heat_map_template').click((e)=>{
+                console.log($('.heatmap > span').text())
+
+              })
+          }
+
+        }
+        function show_plot(){
+          const prot1 = get_input_prot_1();
+          // const chain1 = get_input_chain_1();
+          // const prot2 = get_input_prot_2();
+          // const chain2 = get_input_chain_2();
+          //console.log(prot1,prot2, chain1, chain2)
+          if(prot1){
+            let url_string = window.location.href;
+            let url = new URL(url_string);
+            let pasta = url.searchParams.get('pasta');
+            let div = $('#plotpng');
+            div.empty();
+            div.append(`
+              <img 
+              
+              src='http://localhost/upload_ring_files/${pasta}/plot.svg' />
+            `)
+            
+          }
+
+        }
+        function show_degree(){
+          
+          const prot1 = get_input_prot_1();
+          // const chain1 = get_input_chain_1();
+          // const prot2 = get_input_prot_2();
+          // const chain2 = get_input_chain_2();
+          //console.log(prot1,prot2, chain1, chain2)
+          if(prot1 ){
+            let url_string = window.location.href;
+            let url = new URL(url_string);
+            let pasta = url.searchParams.get('pasta');
+            let div = $('#heat_map_degree_template');
+            div.empty();
+            var primeira = prot1.split('-')[0];
+            // console.log(primeira, `../upload_ring_files/${pasta}/heatmap_degree_${primeira}.csv`)
+            chart_degree(`../upload_ring_files/${pasta}/heatmap_degree_${primeira}.csv`);
+
+            
+            //heatmap("../upload_ring_files/6xof0to7i8ppkloc4mf94st1bocgdgoy/heatmap-1b55x2z0p-AB.csv");
+            //console.log(`../upload_ring_files/${pasta}/heatmap-${prot1}x${prot2}-${chain1}${chain2}.csv`);
+            
+          }
+
+        }
+        function show_degree2(){
+          
+          const prot1 = get_input_prot_1();
+          // const chain1 = get_input_chain_1();
+          // const prot2 = get_input_prot_2();
+          // const chain2 = get_input_chain_2();
+          //console.log(prot1,prot2, chain1, chain2)
+          if(prot1 ){
+            let url_string = window.location.href;
+            let url = new URL(url_string);
+            let pasta = url.searchParams.get('pasta');
+            let div = $('#heat_map_degree_template_sec');
+            div.empty();
+            var segunda = prot1.split('-')[1];
+            // console.log(`../upload_ring_files/${pasta}/heat_degree_${segunda}.csv`  )
+            chart_degree2(`../upload_ring_files/${pasta}/heatmap_degree_${segunda}.csv`);
+
+            
+            //heatmap("../upload_ring_files/6xof0to7i8ppkloc4mf94st1bocgdgoy/heatmap-1b55x2z0p-AB.csv");
+            //console.log(`../upload_ring_files/${pasta}/heatmap-${prot1}x${prot2}-${chain1}${chain2}.csv`);
+            
+          }
+
+        }
+
+        function show_diff_degree(){
+          
+          const prot1 = get_input_prot_1();
+          // const chain1 = get_input_chain_1();
+          // const prot2 = get_input_prot_2();
+          // const chain2 = get_input_chain_2();
+          //console.log(prot1,prot2, chain1, chain2)
+          if(prot1  ){
+            let url_string = window.location.href;
+            let url = new URL(url_string);
+            let pasta = url.searchParams.get('pasta');
+            let div = $('#degree_diff');
+            div.empty();
+            // console.log(`../upload_ring_files/${pasta}/graphic_dif_degree_${prot1}.csv`)
+            degree_diff(`../upload_ring_files/${pasta}/${prot1}/graphic_dif_degree_${prot1}.csv`);
+            //degree-1b55x2z0p-AA.tsv
+            //heatmap("../upload_ring_files/6xof0to7i8ppkloc4mf94st1bocgdgoy/heatmap-1b55x2z0p-AB.csv");
+            //console.log(`../upload_ring_files/${pasta}/heatmap-${prot1}x${prot2}-${chain1}${chain2}.csv`);
+            
+          }
+
+        }
+        function show_interations(){
+          
+          const prot1 = get_input_prot_1();
+          // const chain1 = get_input_chain_1();
+          // const prot2 = get_input_prot_2();
+          // const chain2 = get_input_chain_2();
+          //console.log(prot1,prot2, chain1, chain2)
+          if(prot1){
+            let url_string = window.location.href;
+            let url = new URL(url_string);
+            let pasta = url.searchParams.get('pasta');
+            let div = $('#interaction_degree');
+            div.empty();
+            // console.log(prot1,`../upload_ring_files/${pasta}/graphic_dif_interaction_${prot1}.csv`)
+            //graphic_dif_interaction_1aki(A)-1b2k(A)
+            show_interation(`../upload_ring_files/${pasta}/${prot1}/graphic_dif_interaction_${prot1}.csv`);
+            //1b55x2z0p-AA.tsv
+            //heatmap("../upload_ring_files/6xof0to7i8ppkloc4mf94st1bocgdgoy/heatmap-1b55x2z0p-AB.csv");
+            //console.log(`../upload_ring_files/${pasta}/heatmap-${prot1}x${prot2}-${chain1}${chain2}.csv`);
+            
+          }
+
+        }
+        function get_lista_proteinas(){
+          let url_string = window.location.href;
+          let url = new URL(url_string);
+          let lista = url.searchParams.get('lista');
+          let lista_arr = split_nome_arquivo(lista);
+          return lista_arr;
+        }
+        function split_nome_arquivo(params){
+          //console.log(params);
+          params = params.split(',');
+          let proteinas = [];
+          for (param of params){
+            p = param.split(',')[0];
+            proteinas.push( p);
+          }
+          //console.log(proteinas);
+          return proteinas;
+        }
+    
+        function att_protein_1(lista){
+          let div = $('#protein1');
+          for (prot of lista){
+            //console.log(prot)
+            div.append(`<a class='dropdown-item heatmap_change ' id='prot1_${prot}' href='#' onclick='att_input_prot_1(this)'>${prot}</a>`)
+          }
+        }
+        function att_protein_2(lista = get_lista_proteinas()){
+          let div = $('#protein2');
+          //div.empty();
+          //let prot = get_input_prot_1();
+          //lista = lista.filter((item)=>{ return item != prot  })
+//console.log(prot);
+          
+          for (prot of lista){
+            //console.log(prot)
+            div.append(`<a class='dropdown-item heatmap_change 'id='prot2_${prot}' href='#' onclick='att_input_prot_2(this)'>${prot}</a>`)
+          }
+        }
+
+        // function att_chains_1(){
+          
+        //   let url_string = window.location.href;
+        //   let url = new URL(url_string);
+        //   let pasta = url.searchParams.get('pasta')
+          
+        //   let prot_name = get_input_prot_1();
+          
+        //   $.ajax({
+            
+        //     url : 'http://127.0.0.1:8000/core/pegarchains/?prot='+prot_name+'&pasta='+pasta, 
+        //     type : 'GET',
+        //     contentType : false,
+        //     processData : false,
+        //     success: function(data){
+        //       let div_chain = $('#chain1');
+        //       div_chain.empty();
+        //       for (c of data.chain){
+                 
+        //          div_chain.append(`<a class='dropdown-item  heatmap_change chain1'  id='chain1_${c}'  onclick='att_input_chain_1(this)' href='#' >${c}</a>`);
+                 
+        //       }
+              
+        //       let all_chains_1 = $('.chain1');
+        //       for (el of all_chains_1){
+        //         el.addEventListener('click', function(e){
+        //           valor = el.innerHTML;
+        //           let input = $("#chain_select_1");
+        //           input.val(valor);
+
+        //         })
+        //       }   
+        //     }
+        //   });
+
+           
+        // }
+
+
+        // function att_chains_2(){
+          
+        //   let url_string = window.location.href;
+        //   let url = new URL(url_string);
+        //   let pasta = url.searchParams.get('pasta')
+          
+        //   let prot_name = get_input_prot_2();
+        //   if(prot_name != ''){
+        //     $.ajax({
+              
+        //       url : 'http://127.0.0.1:8000/core/pegarchains/?prot='+prot_name+'&pasta='+pasta, 
+        //       type : 'GET',
+        //       contentType : false,
+        //       processData : false,
+        //       success: function(data){
+        //         let div_chain = $('#chain2');
+        //         div_chain.empty();
+        //         for (c of data.chain){
+                  
+        //           div_chain.append(`<a class='dropdown-item heatmap_change chain2 '  id='chain2_${c}' onclick='att_input_chain_2(this)' href='#' >${c}</a>`);
+                  
+        //         }
+                
+        //         let all_chains_1 = $('.chain2');
+        //         for (el of all_chains_1){
+        //           el.addEventListener('click', function(e){
+        //             valor = el.innerHTML;
+        //             let input = $("#chain_select_2");
+        //             input.val(valor);
+
+        //           })
+        //         }   
+        //       }
+        //     });
+        //   }  
+           
+        // }
+
+        function att_input_prot_1(elm){
+          
+          
+          valor = elm.innerHTML;
+          // if( valor == get_input_prot_2() ){
+            
+          //   give_event_to_protein_and_chain = true;
+
+          //   let input = $("#proteina_select_2");
+          //   let small = $("#protein_2_small");
+          //   let degree_heat_prot2 = $("#degree_heat_prot2");
+          //   set_input_chain_2();
+          //   degree_heat_prot2.html('');
+          //   small.html('');
+          //   input.val('');
+          // }
+            let input = $("#proteina_select_1");
+            let small = $("#protein_1_small");
+            let degree_heat_prot1 = $("#degree_heat_prot1");
+            let degree_heat_prot2 = $("#degree_heat_prot2");
+          
+            small.html(valor);
+            degree_heat_prot1.html(valor.split('-')[0]);
+            degree_heat_prot2.html(valor.split('-')[1]);
+            
+            input.val(valor);
+          
+            // att_protein_2();
+            // att_chains_1();
+            showPlot(elm);
+           
+        }
+        function att_input_prot_2(elm){
+          valor = elm.innerHTML;
+          give_event_to_protein_and_chain = true;
+          let input = $("#proteina_select_2");
+          let small = $("#protein_2_small");
+          let degree_heat_prot2 = $("#degree_heat_prot2");
+          
+          degree_heat_prot2.html(valor.split('-')[1]);
+          small.html(valor);
+          input.val(valor);
+
+          // att_chains_2();
+        }
+        function get_input_prot_1(){
+          return $("#protein_1_small").html();
+        }
+        function get_input_prot_2(){
+          return $("#protein_2_small").html();
+        }
+        
+        // function att_input_chain_1(elm){
+        //   valor = elm.innerHTML;
+        //   //console.log(valor)
+
+
+
+        //   let input = $("#chain_select_1");
+        //   let small = $("#chain_1_small");
+          
+        //   small.html(valor);
+        //   input.val(valor);
+
+          
+        // }
+        function showPlot(elm){
+          // valor = elm.innerHTML;
+          give_event_to_protein_and_chain = true;
+          // let input = $("#chain_select_2");
+          // let small = $("#chain_2_small");
+          
+          // small.html(valor);
+          // input.val(valor);
+          
+          if($("#proteina_select_1").val()){
+            let el_heatmap_change = $('.heatmap_change');
+            // for (el of el_heatmap_change){
+            //   el.addEventListener('click', function(e){
+                
+            //     show_heatmap();
+            //     show_degree();
+            //     show_degree2();
+            //     show_diff_degree();
+            //     show_interations();
+            //     get_degree();
+            //     // get_node();
+            //     // get_edge();
+            //   })
+            // }
+            show_plot();
+            show_heatmap();
+            show_degree();
+            show_degree2();
+            show_diff_degree();
+            show_interations();
+            get_degree();
+            get_Rcode_Nos_1();
+            get_Rcode_Nos_2();
+            edgestables();
+            nodestables();
+            // get_node();
+            // get_edge();
+            // give_event_to_protein_and_chain = false;
+          }
+          
+        }
+        function get_input_chain_1(){
+          return $("#chain_1_small").html();
+        }
+        function get_input_chain_2(){
+          return $("#chain_2_small").html();
+        }
+        function set_input_chain_2(valor=''){
+          return $("#chain_2_small").html(valor);
+        }
+
+
+
+      
+
+       
+      </script> 
+
+
+
+
+
+
+
+  
+  
+
+  <!-- File item template -->
+  <script type="text/html" id="files-template">
+      <li class="media">
+        <div class="media-body mb-1">
+          <p class="mb-2">
+            <strong>%%filename%%</strong> - Status: <span class="text-muted">Waiting</span>
+          </p>
+          <div class="progress mb-2">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
+              role="progressbar"
+              style="width: 0%" 
+              aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            </div>
+          </div>
+          <hr class="mt-1 mb-1" />
+        </div>
+      </li>
+    </script>
+
+  <!-- Debug item template -->
+  <script type="text/html" id="debug-template">
+      <li class="list-group-item text-%%color%%"><strong>%%date%%</strong>: %%message%%</li>
+    </script>
+
+
+
+</body>
+  
+
+</html>

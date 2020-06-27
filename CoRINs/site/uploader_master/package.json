@@ -1,0 +1,61 @@
+{
+  "name": "dm-file-uploader",
+  "title": "jQuery Ajax File Uploader Widget",
+  "description": "A very lightweight and configurable jQuery Plugin for file uploading using ajax(async); includes support for queues, progress tracking and drag and drop.",
+  "version": "1.0.2",
+  "homepage": "https://github.com/danielm/uploader",
+  "author": {
+    "name": "Daniel Morales",
+    "url": "https://danielmg.org"
+  },
+  "main": "src/js/jquery.dm-uploader.js",
+  "maintainers": [
+    {
+      "name": "Daniel Morales",
+      "email": "daniel85mg@gmail.com",
+      "url": "https://danielmg.org"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danielm/uploader.git"
+  },
+  "bugs": "https://github.com/danielm/uploader/issues",
+  "download": "https://github.com/danielm/uploader/releases",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": ">=1.7.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^2.2.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-contrib-watch": "^1.0.0"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "build": "grunt build",
+    "pushtags": "git push --tags origin master"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "javascript",
+    "jquery",
+    "lightweight",
+    "upload",
+    "ajax",
+    "forms",
+    "file",
+    "widget",
+    "multiple",
+    "dnd",
+    "drag",
+    "drop",
+    "progress",
+    "form",
+    "queue",
+    "lightweight"
+  ]
+}
